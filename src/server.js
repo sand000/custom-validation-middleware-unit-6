@@ -15,8 +15,7 @@ let updateDb = (update) =>{
 }
 
 const app = express();
-app.use(express.json())
-// app.use( Validation);
+app.use(express.json());
 
 // get movies
 app.get("/movies", (req, res)=>{
@@ -24,13 +23,12 @@ app.get("/movies", (req, res)=>{
 });
 
 //  post movies
-app.post("/movies", (req, res)=>{
+app.post("/movies",Validation, (req, res)=>{
     let movie = req.body;
     movies.push(movie);
     updateDb({...db, movies})
     res.send(movies);
 });
-
 
 app.listen(8090, ()=>{
     console.log("listening on port 8090");
